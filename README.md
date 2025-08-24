@@ -1,61 +1,46 @@
-# 🚀 BlankWeb — Beginner-Friendly SaaS Starter
+# 🚀 Blankweb Starter
 
-This is a **Next.js 14 baseline project** already wired with:
+A **Next.js SaaS baseline** project with authentication, database, payments, and testing configured out of the box.
 
-- ✅ Next.js 14 + TypeScript + Tailwind CSS
-- 🔑 Clerk (authentication)
-- 🗄️ Prisma + PostgreSQL
-- 💳 Stripe Checkout
-- 🧪 Jest (unit tests) + Playwright (end-to-end tests)
-- ⚡ ESLint + TypeScript strict mode
-- 🔐 `.env` example file (so you don’t guess where secrets go)
+## 🛠 Tech Stack
 
-This README explains everything step by step — for **Windows (PowerShell)** and **Mac/Linux (Terminal)**.
+- ✅ **Next.js 14** + TypeScript + Tailwind CSS
+- 🔑 **Clerk** authentication
+- 🗄️ **Prisma** + PostgreSQL database
+- 💳 **Stripe** Checkout
+- 🧪 **Jest** (unit) + **Playwright** (e2e)
+- 🧹 **ESLint** + strict TypeScript
 
 ---
 
-## 🖥 1) Clone the Repo
+## 🚀 Quick Start
 
-**Windows (PowerShell)**
-```powershell
-cd C:\dev
-git clone https://github.com/secretisgratitude/blankweb.git
-cd blankweb
+### 1. Clone the Repository
 
-
-Mac/Linux
-
+```bash
+# Create dev directory and clone
 mkdir -p ~/dev && cd ~/dev
 git clone https://github.com/secretisgratitude/blankweb.git
 cd blankweb
+```
 
-📦 2) Install Dependencies
+### 2. Install Dependencies
 
-Windows
-
+```bash
 npm install
+```
 
+### 3. Environment Setup
 
-Mac/Linux
+Copy the environment template:
 
-npm install
-
-🔑 3) Set Up Environment Variables
-
-Copy .env.example → .env.local
-
-Windows
-
-copy .env.example .env.local
-
-
-Mac/Linux
-
+```bash
 cp .env.example .env.local
+```
 
+Edit `.env.local` with your credentials:
 
-Edit .env.local and fill in real values (placeholders work for local dev):
-
+```env
 DATABASE_URL=postgresql://user:password@localhost:5432/blankweb
 NEXT_PUBLIC_APP_URL=http://localhost:3000
 
@@ -67,111 +52,78 @@ STRIPE_PRICE_ID=price_xxx
 STRIPE_WEBHOOK_SECRET=whsec_xxx
 
 SENTRY_DSN=
+```
 
+> 💡 `.env.local` is git-ignored and safe for secrets
 
-💡 Keep .env.local out of git (already ignored by .gitignore).
+### 4. Database Setup
 
-▶ 4) Run the Dev Server
-
-Windows
-
-npm run dev
-
-
-Mac/Linux
-
-npm run dev
-
-
-Open: http://localhost:3000
-
-🧪 5) Tests
-
-Unit (Jest)
-
-npm run test
-
-
-E2E (Playwright)
-First time only:
-
-npx playwright install
-
-
-Then:
-
-npm run e2e
-
-
-Tip: run npm run dev in a second terminal while e2e tests open the site.
-
-🗄 6) Database (Prisma)
-
-Push schema to your DB:
-
+```bash
+# Push schema to your database
 npx prisma db push
 
-
-Open DB UI (optional):
-
+# Open Prisma Studio (optional)
 npx prisma studio
+```
 
-☁ 7) Deploy to Vercel
+### 5. Start Development Server
 
-Go to https://vercel.com
- → New Project → Import this GitHub repo.
+```bash
+npm run dev
+```
 
-In Project Settings → Environment Variables, add every key from your .env.local.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-Click Deploy 🎉
+---
 
-In provider dashboards:
+## 🧪 Testing
 
-Clerk → add your Vercel domain to Allowed Origins.
+### Unit Tests (Jest)
+```bash
+npm run test
+```
 
-Stripe → configure product price_xxx and allowed redirect URLs.
+### End-to-End Tests (Playwright)
+```bash
+# First time setup
+npx playwright install
 
-Update NEXT_PUBLIC_APP_URL to your Vercel URL and redeploy.
+# Run e2e tests
+npm run e2e
+```
 
-🛠 Scripts
-"dev": "next dev",
-"build": "next build",
-"start": "next start",
-"lint": "next lint",
-"typecheck": "tsc --noEmit",
-"test": "jest",
-"e2e": "playwright test",
-"ci:all": "npm run lint && npm run typecheck && npm run test && npm run e2e"
+---
 
+## 🚀 Deployment
 
-Run everything:
+### Deploy to Vercel
 
-npm run ci:all
+1. Push your code to GitHub
+2. Import the repository into [Vercel](https://vercel.com)
+3. Add environment variables in **Project Settings → Environment Variables**
+4. Deploy your project
+5. Update `NEXT_PUBLIC_APP_URL` in your environment variables to your production domain
 
-📂 Project Structure
-app/
-  layout.tsx            # Global layout with ClerkProvider
-  page.tsx              # Public home
-  dashboard/page.tsx    # Protected page
-  api/stripe/route.ts   # Stripe checkout API
+---
 
-middleware.ts           # Clerk route protection
+## 📚 Documentation
 
-prisma/
-  schema.prisma         # Database schema
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Clerk Authentication](https://clerk.com/docs)
+- [Prisma Database](https://www.prisma.io/docs)
+- [Stripe Payments](https://stripe.com/docs)
+- [Playwright Testing](https://playwright.dev/docs/intro)
 
-tests/
-  example.test.ts       # Jest unit test
-  e2e/home.spec.ts      # Playwright end-to-end test
+---
 
-🆘 Common Issues
+## 🤝 Contributing
 
-jest-environment-jsdom not found → npm i -D jest-environment-jsdom
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Run tests to ensure everything works
+5. Submit a pull request
 
-Playwright complains → npx playwright install
+## 📄 License
 
-Clerk login loop → add domain to Clerk → Allowed Origins
-
-Stripe 500 → check STRIPE_SECRET_KEY and valid STRIPE_PRICE_ID
-
-DB errors → verify DATABASE_URL and run npx prisma db push
+This project is open source and available under the [MIT License](LICENSE).
