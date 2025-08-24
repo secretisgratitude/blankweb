@@ -1,4 +1,3 @@
-README.md
 # 🚀 BlankWeb — Beginner-Friendly SaaS Starter
 
 This is a **Next.js 14 baseline project** already wired with:
